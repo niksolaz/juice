@@ -1,0 +1,15 @@
+extends layout
+
+block content
+
+if authorised
+    h1 Welcome to my secret page, you have made it!
+    img(src="http://bit.ly/1j7LCvf")
+else
+    h1 You're not authorised to view this page
+	h1= register
+  
+	form(action="/utente", method="post")
+    	input(type="mail",name="mail")
+    	input(type="password",name="secret")
+    	input(type="submit",value="Show me!")

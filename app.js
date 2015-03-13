@@ -1,12 +1,12 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+//var favicon = require('serve-favicon');
+//var logger = require('morgan');
+//var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var utente = require('./routes/utente');
 
 var app = express();
 
@@ -16,14 +16,22 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use(routes);
+
+router.all('/', function (req, res, next) {  
+  console.log('Someone made a request!');
+  next();
+});
+
+router.get('/', function (req, res) {  
+  res.render('index');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -57,8 +65,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
-
 var server = app.listen(3000,function(){
 
   var host = server.address().address
@@ -66,3 +72,7 @@ var server = app.listen(3000,function(){
 
   console.log('You are connected at http://%s:%s',host,port)
 });
+
+module.exports = app;
+
+
