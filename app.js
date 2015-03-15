@@ -24,12 +24,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-router.all('/', function (req, res, next) {  
+routes.all('/', function (req, res, next) {  
   console.log('Someone made a request!');
   next();
 });
 
-router.get('/', function (req, res) {  
+routes.get('/', function (req, res) {  
   res.render('index');
 });
 
